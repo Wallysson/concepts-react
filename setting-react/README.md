@@ -1,4 +1,4 @@
-# [Configurando um ambiente react]
+# Configurando um ambiente react
 
 A ferramenta que estou utilizando é o [Vite](https://vitejs.dev/) por ser mais rápido sua instalação e mais pela sua facilidade.
 
