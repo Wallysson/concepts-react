@@ -1,21 +1,21 @@
 export function App() {
-
-  return (
-      <div className="App">
-        <Person name="Wallysson" age={32} email="wallysson@email.com"></Person>
-        <Person name="Leticia" age={25} email="leticia@email.com"></Person>
-        <Person name="Renato" age={28} email="renato@email.com"></Person>
-
-      </div>
-    );
-}
-
-function Person ({name, age, email}) {  
   return (
     <div className="App">
-        <p> {name} </p>
-        <p> {age} </p>
-        <p> {email} </p>
+      <h1>Cars</h1>
+      <Car model="Ferrari" owner="Elon" age={2010} value={500000}/>
+      <Car model="Mclaren" owner="Leticia" age={2020} value={700000}/>
+      <Car model="Ford" owner="Alberto" age={2015} value={50000}/>
     </div>
-  );
+  )
+}
+
+function Car({model, owner, age, value}) {
+  return (
+    <>
+      <p>Model: {model}</p>
+      <p>Owner: {owner}</p>
+      <p>Age: {age}</p>
+      <p>R$: {value}</p>
+    </>
+  )
 }

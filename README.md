@@ -31,20 +31,20 @@ Já deixei uma pasta pré configurada que é só baixar e começar a utilizar e 
 
 No React a extensão para seus arquivos é o JSX (Javascript XML). No inicio pode parecer um pouco estranho, porque o JSX utiliza o HTML dentro de funções JS, isso pode atrapalhar inicialmente, mas depois irá se acostumar.
 
-```
-  export function App() {
-    const name = 'Wallysson'
-    const age = 32
-    const email = 'wallysson@email.com'
+```jsx
+export function App() {
+  const name = 'Wallysson'
+  const age = 32
+  const email = 'wallysson@email.com'
 
-    return (
-      <div className="App">
-        <p> {name} </p>
-        <p> {age} </p>
-        <p> {email} </p>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <p> {name} </p>
+      <p> {age} </p>
+      <p> {email} </p>
+    </div>
+  )
+}
 ```
 
 No JSX quando queremos usar alguma sinxtaxe Javascript é necessário utilizar {} dentro da tag HTML para visualizar na tela.
@@ -57,7 +57,7 @@ No JSX quando queremos usar alguma sinxtaxe Javascript é necessário utilizar {
 
 Para criar um componente é uma função que vai envelopar tudo que fizemos e assim limpando e ficando mais fácil para dar manutenção.
 
-```
+```jsx
   export function App() {
 
     return (
@@ -92,43 +92,41 @@ Um dos conceitos mais importantes dos componentes é a comunicação utilizando 
 Os props enviam dados dos elementos pai para o filho, portanto deve ter cuidado em relação a isso.
 Vamos voltar pra função App e o componente Person para utilizar props para ver como maleável fica a solução.
 
-```
-  export function App() {
+```jsx
+export function App() {
+  return (
+    <div className="App">
+      <Person name="Wallysson" age={32} email="wallysson@email.com"></Person>
+      <Person name="Leticia" age={25} email="leticia@email.com"></Person>
+      <Person name="Renato" age={28} email="renato@email.com"></Person>
+    </div>
+  )
+}
 
-    return (
-        <div className="App">
-          <Person name="Wallysson" age={32} email="wallysson@email.com"></Person>
-          <Person name="Leticia" age={25} email="leticia@email.com"></Person>
-          <Person name="Renato" age={28} email="renato@email.com"></Person>
-
-        </div>
-      );
-  }
-
-  function Person (props) {
-    return (
-      <div className="App">
-          <p> {props.name} </p>
-          <p> {props.age} </p>
-          <p> {props.email} </p>
-      </div>
-    );
-  }
+function Person(props) {
+  return (
+    <div className="App">
+      <p> {props.name} </p>
+      <p> {props.age} </p>
+      <p> {props.email} </p>
+    </div>
+  )
+}
 ```
 
 Repare como tranportamos as informações name, age, email pelo componente pai App para o componente filho Person. Dentro dele passamos os paramêtros props, caso tenha familiriadade com objetos em Javascript, as informações que chegam nesse props é da seguinte maneira.
 
-```
+```js
   const props = {
     name: 'String',
     age: Number,
-    email: 'String
+    email: 'String'
   }
 ```
 
 Podemos desestruturar as props para deixar o código mais enxuto se necessário
 
-```
+```jsx
   function Person ({name, age, email}) {
   return (
     <div className="App">
