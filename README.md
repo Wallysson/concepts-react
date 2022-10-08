@@ -341,5 +341,3 @@ Muitas vezes vamos receber um array com vários objetos para poder trabalhar, co
 
 Usei o que aprendemos em props e components, criei um componente Car, com propriedades model, year e value que as informações que chegam na lista cars.
 Dessa forma o map vai percorrer toda lista, criar cada componente pra cada item e assim mostrar na tela.
-
-
