@@ -1,26 +1,33 @@
 export function App() {
-  const cars = [
-    {model: 'Ford', year: 2012, value: 50000},
-    {model: 'Fiat', year: 2022, value: 75900},
-    {model: 'Chevrolet', year: 1990, value: 4000}
+  const purchases = [
+    {name: 'apple', type: 'food'},
+    {name: 't-shirt', type: 'clothes'},
+    {name: 'rice', type: 'food'},
+    {name: 'orange', type: 'food'},
+    {name: 'shorts', type: 'clothes'}
   ]
+
   return (
     <div>
-      {cars.map((car, id) => {
-        return (
-          <Car model={car.model} year={car.year} value={car.value} id={id} key={id}/>
-        )
-      })}
+      <h1>Shopping List</h1>
+      <h2>Food</h2>
+        {purchases.map((purchase, id) => {
+          return (
+            purchase.type === 'food' && <ListPurchase name={purchase.name} key={id}/>
+          )
+        })}
+      <h2>Clothes</h2>
+      {purchases.map((purchase, id) => {
+          return (
+            purchase.type === 'clothes' && <ListPurchase name={purchase.name} key={id}/>
+          )
+        })}
     </div>
   )
 }
 
-function Car({model, year, value}) {
+function ListPurchase({name}) {
   return (
-    <div>
-      <p>Modelo: {model}</p>
-      <p>Ano: {year}</p>
-      <p>R$ {value}</p>
-  </div>
+    <p>{name}</p>
   )
 }

@@ -203,3 +203,57 @@ Muitas vezes vamos receber um array com vários objetos para poder trabalhar, co
 
 Usei o que aprendemos em props e components, criei um componente Car, com propriedades model, year e value que as informações que chegam na lista cars.
 Dessa forma o map vai percorrer toda lista, criar cada componente pra cada item e assim mostrar na tela.
+
+## Exercicio
+
+De acordo com o que aprendemos em componentização, propriedades e listas, operador ternário, criar uma visualização que irá parecer lista do tipo 'food' ou 'clothes'
+
+```js
+  const purchases = [
+    {name: 'apple', type: 'food'},
+    {name: 't-shirt', type: 'clothes'},
+    {name: 'rice', type: 'food'},
+    {name: 'orange', type: 'food'},
+    {name: 'shorts', type: 'clothes'}
+  ]
+```
+<details>
+  <summary>Resolução</summary>
+  
+```jsx
+  export function App() {
+    const purchases = [
+      {name: 'apple', type: 'food'},
+      {name: 't-shirt', type: 'clothes'},
+      {name: 'rice', type: 'food'},
+      {name: 'orange', type: 'food'},
+      {name: 'shorts', type: 'clothes'}
+    ]
+
+    return (
+      <div>
+        <h1>Shopping List</h1>
+        <h2>Food</h2>
+          {purchases.map((purchase, id) => {
+            return (
+              purchase.type === 'food' && <ListPurchase name={purchase.name} key={id}/>
+            )
+          })}
+        <h2>Clothes</h2>
+        {purchases.map((purchase, id) => {
+            return (
+              purchase.type === 'clothes' && <ListPurchase name={purchase.name} key={id}/>
+            )
+          })}
+      </div>
+    )
+  }
+
+  function ListPurchase({name}) {
+    return (
+      <p>{name}</p>
+    )
+  }
+```
+
+</details>
