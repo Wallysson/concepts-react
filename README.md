@@ -342,7 +342,7 @@ Muitas vezes vamos receber um array com vários objetos para poder trabalhar, co
 Usei o que aprendemos em props e components, criei um componente Car, com propriedades model, year e value que as informações que chegam na lista cars.
 Dessa forma o map vai percorrer toda lista, criar cada componente pra cada item e assim mostrar na tela.
 
-## React Hooks
+## [React Hooks](https://github.com/Wallysson/concepts-react/tree/main/useState)
 
 A partir da versão 16.8 do React a proposta de utilizar Hooks foi aceita e permite usar estados, ciclos de vida, entre outras funcionalidades, sem a necessidade de escrever componentes com classe.
 
@@ -356,7 +356,7 @@ Os Hooks resolvem uma grande variedade de problemas encontrados durante o desenv
 * Componentes contendo grandes responsabilidades;
 * Confusão ao utilizar classes (this, classes).‍‍
 
-## useState
+## [useState](https://github.com/Wallysson/concepts-react/tree/main/useState)
 
 Nos permite criar estados em um componente criado a partir de uma função. Ele cria uma variável que controla o estado do componente. Para isso passamos o valor inicial do estado e importamos useState do React.
 
