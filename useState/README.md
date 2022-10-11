@@ -103,3 +103,64 @@ Se o contador for menor que 0, mudar o valor da cor do texto para vermelho.
     )
   }
 ```
+
+### Exemplo: Fazer um ToDoList
+
+Fazer uma lista de tarefas é como fazer um "Hello World" para quem está começando estudar React e estados. Portanto, fazer uma lista de tarefas capaz de:
+
+* Adicionar uma nova tarefa
+* Mostrar a lista de tarefa
+* Deletar a tarefa selecionada
+
+Para isso é necessário saber bem a utilização do useState e como usar o .map() para mostrar as tarefas na tela. A
+
+<details>
+  <summary>Resolução</summary>
+  
+```jsx
+  import { useState } from "react"
+
+  export function App() {
+    const [tasks, setTasks] = useState([]) // lista das tarefas
+    const [newTask, setNewTask] = useState('') // onde vai armazenar os valores da nova tarefa no input
+
+    function onChangeNewTask(e) {
+      setNewTask(e.target.value) // pega os valores do input e coloca na função setNewTask
+    }
+
+    function handleNewTask() {
+      const task = {
+        id: tasks.length + 1,
+        taskName: newTask
+      }
+      // criei uma constante auxiliar para armazenar os valores de id e o nome da tarefa, porque vamos precisar para deletar o id da tarefa correta
+      setTasks([...tasks, task])
+      // aqui usamos o spread operator para trazer todas tarefas + a task nova criada para seguir o principio da imutabilidade do react
+    }
+
+    function deleteTask(id) {
+      setTasks(tasks.filter((task) => task.id !== id))
+    }
+
+    return (
+      <div>
+        <h1>ToDoList</h1>
+        <div>
+          <input type="text" onChange={onChangeNewTask} />
+          <button onClick={handleNewTask}>Add Task</button>
+        </div>
+        <ul>
+          {tasks.map((task) => {
+            return (
+              <li key={task.id}>{task.taskName}
+                <button onClick={() => deleteTask(task.id)}>X</button>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  }
+```
+
+</details>

@@ -371,6 +371,11 @@ Sintaxe:
   // useState(): chamada do hook, e dentro dos parênteses temos o valor inicial.
 ```
 
+### Imuntabilidade
+
+Recomenda-se nunca haver modificações diretamente no estado do componente. Em outras palavras, evite alterar o valor manualmente, pois isso acaba gerando um erro e travando o seu componente. Por isso o ideal é que haja uma evolução desse estado.
+Dessa forma, dentro do mesmo projeto podemos ter vários valores diferentes que estarão associados ao componente. Uma vez que sua estrutura é bem flexível, pode receber praticamente qualquer dado.
+
 ### Exemplo: Mostrar e esconder texto
 
 Vamos usar o useState para manipular se o texto vai ser visualizado na tela ou será escondido de acordo com o clique do usuário para
