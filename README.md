@@ -230,17 +230,17 @@ No arquivo .module.css:
 ```
 No arquivo JSX: 
 ```jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import styles from './mystyle.module.css'; 
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import styles from './mystyle.module.css'; 
 
-class Car extends React.Component {
-  render() {
-    return <h1 className={styles.bigblue}>Hello Car!</h1>;
+  class Car extends React.Component {
+    render() {
+      return <h1 className={styles.bigblue}>Hello Car!</h1>;
+    }
   }
-}
 
-export default Car;
+  export default Car;
 ```
 
 ## [Listas em React](https://github.com/Wallysson/concepts-react/tree/main/ternary-list-css)
@@ -249,9 +249,7 @@ Em vários momentos no react vai ser necessário listar os items que vem de um a
 
 Se olharmos a documentação do [Mozilla](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map) o map é uma função que devolve um Array como resultado.
 
-### Exemplos
-
-#### Exemplo: Mapeando um array de números para um array de raízes quadradas
+### Exemplo: Mapeando um array de números para um array de raízes quadradas
 
 O código a seguir mapeia um array de números e cria um novo array contendo o valor da raiz quadrada de cada número do primeiro array.
 
@@ -261,7 +259,7 @@ O código a seguir mapeia um array de números e cria um novo array contendo o v
   // roots é [1, 2, 3], numbers ainda é [1, 4, 9]
 ```
 
-#### Exemplo: Mapeando um array de números usando uma função callback que contém um argumento
+### Exemplo: Mapeando um array de números usando uma função callback que contém um argumento
 
 O código a seguir mostrar como o método map funciona quando a função callback possui apenas um argumento. Esse argumento será automaticamente atribuído para cada elemento do array conforme o map itera sobre o array original.
 
@@ -448,6 +446,121 @@ Se o contador for menor que 0, mudar o valor da cor do texto para vermelho.
         </div>
         <h3 style={{color: count >= 0 ? 'green' : 'red'}}>{count}</h3>
           {/* Usando condições para mostrar a cor verde ou vermelho de acordo com o valor */}
+      </div>
+    )
+  }
+```
+
+## [Lifecycle React]()
+
+Os ciclos de vida têm o objetivo de criar e destruir componentes que não estão sendo utilizados. Dessa forma, podemos garantir que os recursos serão alocados somente nos componentes em uso.
+
+O ciclo de vida de um componente possui três fases:
+
+Montagem: É o “nascimento” ou a inicialização do componente. Nesse momento, o componente será montado na DOM.
+Atualização: Essa etapa acontece depois da montagem do componente na DOM e vai adicionando ou removendo elementos a medida que o componente for recebendo algum tipo de atualização, seja através das props ou do estado.
+Desmontagem: O componente já não é mais necessário e precisa ser removido da tela. Para isso temos uma função que fará esse trabalho para nós.
+
+Para saber mais sobre o ciclo de vida do React, clicar [aqui](https://reactjs.org/docs/state-and-lifecycle.html).
+
+## [useEffect]()
+
+Você provavelmente já realizou obtenção de dados (data fetching), subscrições (subscriptions) ou mudanças manuais no DOM através de componentes React antes. Nós chamamos essas operações de “efeitos colaterais” (side effects ou apenas effects) porque eles podem afetar outros componentes e não podem ser feitos durante a renderização.
+O Hook de Efeito, useEffect, adiciona a funcionalidade de executar efeitos colaterais através de um componente funcional.
+
+Sintaxe: 
+
+```jsx
+  import React, { useState, useEffect } from 'react';
+
+  useEffect((), {}, [])
+```
+
+Quando o useEffect é chamado, o React executa a função de 'efeito' após liberar as mudanças para o DOM. Efeitos são declarados dentro do componente, para que eles tenham acesso as suas props e state. Por padrão o React executa os efeitos a cada renderização.
+
+### Exemplo: Contador que muda o título a cada alteração
+
+Toda vez que o contador é aumentado, vamos colocar no título da página o valor.
+
+```jsx
+  import { useEffect, useState } from "react"
+
+  export function Count() {
+    const [count, setCount] = useState(0)
+
+    useEffect(() => {
+      document.title = `Contou ${count} vezes`
+    }, [count])
+
+    function handleIncreaseCount() {
+      setCount(state => state + 1)
+    }
+
+    return (
+      <>
+        <h1>Contador no titulo</h1>
+        <button onClick={handleIncreaseCount}>+</button>
+        <p>{count}</p>
+      </>
+    )
+  }
+```
+
+### Exemplo: Data Fetching uma api de conselhos
+
+Usar o fetch() para buscar informações da api e mostrar pro usuário o conselho do dia.
+
+```jsx
+  import { useEffect, useState } from "react"
+
+  export function FetchFunction() {
+    const [quotes, setQuotes] = useState('')
+
+    const fetchNewQuote = async () => {
+      await fetch('https://api.adviceslip.com/advice')
+      .then(response => response.json())
+      .then(data=> setQuotes(data.slip.advice))
+    }
+
+    useEffect(() => {
+      fetchNewQuote()
+    })
+
+    return (
+      <div>
+        <button onClick={fetchNewQuote}>Gerar frase</button>
+        <h1>{quotes}</h1>
+      </div>
+    )
+  }
+```
+
+### Exemplo: Usando Axios no lugar de Fetch
+
+No lugar de usar o fetch() vamos usar agora o axios porque acredito que seja mais fácil seu entendimento.
+
+```jsx
+  import { useEffect, useState } from "react"
+  import axios from 'axios'
+
+  export function GetWithAxios() {
+    const [curiosities, setCuriosities] = useState('')
+
+    const fetchNewCuriosity = async () => {
+      await axios.get('https://catfact.ninja/fact')
+      .then(response => {
+        setCuriosities(response.data.fact)
+      })
+    }
+
+    useEffect(() => {
+      fetchNewCuriosity()
+    }, [])
+
+    return (
+      <div>
+        <button onClick={fetchNewCuriosity}>Gerar frase</button>
+        <h1>{curiosities}</h1>
       </div>
     )
   }
