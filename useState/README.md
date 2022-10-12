@@ -104,7 +104,7 @@ Se o contador for menor que 0, mudar o valor da cor do texto para vermelho.
   }
 ```
 
-### Exemplo: Fazer um ToDoList
+### Exercicio: Fazer um ToDoList
 
 Fazer uma lista de tarefas é como fazer um "Hello World" para quem está começando estudar React e estados. Portanto, fazer uma lista de tarefas capaz de:
 

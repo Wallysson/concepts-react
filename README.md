@@ -565,3 +565,40 @@ No lugar de usar o fetch() vamos usar agora o axios porque acredito que seja mai
     )
   }
 ```
+
+### Exemplo: Buscar a lista de Pokémon usando uma api
+
+Uma das primeiras api a trabalhar é o do Pokémon, fazer uma busca com a lista e mostrar na tela.
+Api: https://pokeapi.co/api/v2/pokemon
+
+```jsx
+  import { useEffect, useState } from "react";
+
+  export function PokemonApi() {
+      const [pokemons, setPokemon] = useState([]);
+
+      const fetchPokemon = async () => {
+        await fetch("https://pokeapi.co/api/v2/pokemon")
+        .then((response) => response.json())
+        .then((data) => {
+          setPokemon(data.results);
+        });
+      }
+
+      useEffect(() => {
+        fetchPokemon()
+      }, []);
+
+      return (
+          <>
+              <ul>
+                  {pokemons.map((pokemon, key) => (
+                      <li key={key}>
+                          {pokemon.name}
+                      </li>
+                  ))}
+              </ul>
+          </>
+      );
+  }
+```

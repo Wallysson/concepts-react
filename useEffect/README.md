@@ -112,3 +112,117 @@ No lugar de usar o fetch() vamos usar agora o axios porque acredito que seja mai
     )
   }
 ```
+
+### Exemplo: Buscar a lista de Pokémon usando uma api
+
+Uma das primeiras api a trabalhar é o do Pokémon, fazer uma busca com a lista e mostrar na tela.
+Api: https://pokeapi.co/api/v2/pokemon
+
+```jsx
+  import { useEffect, useState } from "react";
+
+  export function PokemonApi() {
+      const [pokemons, setPokemon] = useState([]);
+
+      const fetchPokemon = async () => {
+        await fetch("https://pokeapi.co/api/v2/pokemon")
+        .then((response) => response.json())
+        .then((data) => {
+          setPokemon(data.results);
+        });
+      }
+
+      useEffect(() => {
+        fetchPokemon()
+      }, []);
+
+      return (
+          <>
+              <ul>
+                  {pokemons.map((pokemon, key) => (
+                      <li key={key}>
+                          {pokemon.name}
+                      </li>
+                  ))}
+              </ul>
+          </>
+      );
+  }
+```
+
+### Exercicio: Fazer uma consulta api de Prever Idade
+
+Fazer uma consulta buscando pelo nome e quando clicar no botão, parecer o nome + idade prevista de acordo com a api.
+* Input controlado onde guardará o nome;
+* Button para gerar idade;
+* Usar o nome para fazer a consulta na api.
+Api: https://api.agify.io/
+
+<details>
+  <summary>Resolução</summary>
+
+```jsx
+  import { useState } from "react"
+  import axios from 'axios'
+
+  export function PredictedAge() {
+    const [name, setName] = useState("")
+    const [predictedAge, setPredictedAge] = useState({})
+    
+    const fetchPredictedAge = async () => {
+      await axios.get(`https://api.agify.io/?name=${name}`)
+      .then(response => {
+        setPredictedAge(response.data)
+      })
+    }
+  
+    return (
+      <div> 
+        <h1>Digite seu nome para prever seu nome</h1>
+        <input type="text" placeholder='nome:' onChange={() => setName(event.target.value)}/>
+        <button onClick={fetchPredictedAge}>Predicted Age</button>
+        <h3>Nome: {predictedAge?.name}</h3>
+        <h3>Idade: {predictedAge?.age}</h3>
+      </div>
+    )
+  }
+```
+
+</details>
+
+### Exercicio: Fazer uma consulta api de desculpas
+
+Uma api divertida que tem algumas categorias e quando clicar nela vai trazer uma desculpa e mostrar na tela.
+Api: https://excuser.herokuapp.com/
+
+* De acordo com a documentação deve criar butões para selecionar a categoria da desculpa;
+* Botão para gerar a desculpa;
+* Ficar ligado porque o retorno da consulta vai vir em um array e não um objeto;
+* Usar o template string na query da consula api.
+
+```jsx
+  import axios from "axios"
+  import { useState } from "react"
+
+  export function Excuser() {
+    const [excuser, setExcuser] = useState("")
+    const fetchExcuser = async (category) => {
+      await axios.get(`https://excuser.herokuapp.com/v1/excuse/${category}/`)
+      .then(response => {
+        setExcuser(response.data[0].excuse)
+      })
+    }
+
+    return (
+      <div>
+        <h1>Excuser</h1>
+        <button onClick={() => fetchExcuser('family')}>Family</button>
+        <button onClick={() => fetchExcuser('office')}>Office</button>
+        <button onClick={() => fetchExcuser('children')}>Children</button>
+        <button onClick={() => fetchExcuser('college')}>College</button>
+        <button onClick={() => fetchExcuser('party')}>Party</button>
+        <h2>{excuser}</h2>
+      </div>
+    )
+  }
+```

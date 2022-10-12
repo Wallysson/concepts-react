@@ -1,9 +1,9 @@
-import { GetWithAxios } from "./components/GetWithAxios";
+import { Excuser } from "./components/Excuser";
 
 export function App() {
   return (
     <>
-      <GetWithAxios />
+      <Excuser />
     </>
   )
 }
